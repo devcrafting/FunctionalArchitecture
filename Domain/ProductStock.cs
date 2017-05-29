@@ -2,6 +2,13 @@ namespace HexagonalImpl.Domain
 {
     public class ProductStock
     {
+        private readonly int _currentStock;
+
+        public ProductStock(int currentStock)
+        {
+            _currentStock = currentStock;
+        }
+
         public TemporaryReservation MakeATemporaryReservation(int quantity)
         {
             throw new System.NotImplementedException();
@@ -9,7 +16,11 @@ namespace HexagonalImpl.Domain
 
         public Either<TemporaryReservation, Error> MakeATemporaryReservation_(int quantity)
         {
-            throw new System.NotImplementedException();
+            if (quantity > _currentStock)
+            {
+                return Either<TemporaryReservation, Error>.Right(new Error("Not enough stock, sorry"));
+            }
+            return Either<TemporaryReservation, Error>.Left(new TemporaryReservation());
         }
     }
 }

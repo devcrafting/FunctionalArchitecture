@@ -18,21 +18,22 @@ namespace HexagonalImpl
 
         public HttpResponseMessage AddProduct(AddProduct addProduct)
         {
-            HttpResponseMessage response = null;
             var productStock = _productStocks.Get(addProduct.ProductId);
-            var eitherTemporaryReservationErrors = productStock.MakeATemporaryReservation_(addProduct.Quantity);
-            eitherTemporaryReservationErrors.ContinueWith(temporaryReservation =>
-            {
-                _productStocks.Save(productStock);
-                var cart = _carts.Get(addProduct.CartId);
-                var eitherVoidErrors = cart.Add_(addProduct.ProductId, addProduct.Quantity, temporaryReservation);
-                eitherVoidErrors.ContinueWith(() =>
-                {
-                    _carts.Save(cart);
-                    response = new HttpResponseMessage(HttpStatusCode.Created);
-                }, x => response = new HttpResponseMessage(HttpStatusCode.Forbidden));
-            }, x => response = new HttpResponseMessage(HttpStatusCode.Forbidden));
-            return response;
+            return productStock
+                .MakeATemporaryReservation_(addProduct.Quantity)
+                .ContinueWith(temporaryReservation =>
+                    {
+                        _productStocks.Save(productStock);
+                        var cart = _carts.Get(addProduct.CartId);
+                        return cart.Add_(addProduct.ProductId, addProduct.Quantity, temporaryReservation);
+                    })
+                .ContinueWith(cart =>
+                    {
+                        _carts.Save(cart);
+                        return Either<HttpResponseMessage, Error>.Left(new HttpResponseMessage(HttpStatusCode.OK));
+                    })
+                .OnError(error => new HttpResponseMessage(HttpStatusCode.BadRequest))
+                .Result();
         }
     }
 }
