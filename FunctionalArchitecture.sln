@@ -3,12 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalImpl", "HexagonalImpl.csproj", "{DB2454CC-A1B3-4805-A76F-9DCD875007D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexagonalImpl", "HexagonalImpl\HexagonalImpl.csproj", "{DB2454CC-A1B3-4805-A76F-9DCD875007D1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4DA5C7B8-C55D-4173-94B3-E68EEE31DF9E}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
 	EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FunctionalImpl", "FunctionalImpl\FunctionalImpl.fsproj", "{51020919-8633-4A9A-9DFE-C8DAE542077E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{DB2454CC-A1B3-4805-A76F-9DCD875007D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB2454CC-A1B3-4805-A76F-9DCD875007D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB2454CC-A1B3-4805-A76F-9DCD875007D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51020919-8633-4A9A-9DFE-C8DAE542077E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51020919-8633-4A9A-9DFE-C8DAE542077E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51020919-8633-4A9A-9DFE-C8DAE542077E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51020919-8633-4A9A-9DFE-C8DAE542077E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
